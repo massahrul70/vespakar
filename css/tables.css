@@ -1,0 +1,249 @@
+/* Tables Styles */
+.table-container {
+  background-color: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.table-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--surface);
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  background-color: var(--divider);
+  border-bottom: 1px solid var(--border);
+}
+
+.table-column-headers {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  padding: 12px 16px;
+  background-color: var(--background);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.table-column-headers span {
+  font-size: 0.875rem;
+}
+
+.table-wrapper {
+  overflow-y: auto;
+  max-height: calc(100vh - 240px);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* CF Rules Table Styles */
+#cf-rules-table {
+  width: 100%;
+  margin-top: 16px;
+}
+
+#cf-rules-table thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--background);
+  z-index: 1;
+}
+
+#cf-rules-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+#cf-rules-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--divider);
+  vertical-align: middle;
+}
+
+#cf-rules-table tbody tr {
+  display: table-row;
+  transition: background-color 0.2s ease;
+}
+
+#cf-rules-table tbody tr:hover {
+  background-color: var(--divider);
+}
+
+#cf-rules-table th:nth-child(1),
+#cf-rules-table td:nth-child(1) {
+  width: 120px;
+}
+
+#cf-rules-table th:nth-child(2),
+#cf-rules-table td:nth-child(2) {
+  width: auto;
+}
+
+#cf-rules-table th:nth-child(3),
+#cf-rules-table td:nth-child(3),
+#cf-rules-table th:nth-child(4),
+#cf-rules-table td:nth-child(4),
+#cf-rules-table th:nth-child(5),
+#cf-rules-table td:nth-child(5) {
+  width: 100px;
+  text-align: center;
+}
+
+#cf-rules-table th:nth-child(6),
+#cf-rules-table td:nth-child(6) {
+  width: 100px;
+  text-align: right;
+}
+
+td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--divider);
+  vertical-align: middle;
+}
+
+tbody tr {
+  display: grid;
+  grid-template-columns: 120px 1fr 120px;
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+  background-color: var(--divider);
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background-color: var(--primary-light);
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: var(--primary);
+}
+
+.delete-btn {
+  background-color: var(--danger);
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #DC2626;
+}
+
+.cf-btn {
+  background-color: var(--secondary);
+  color: white;
+}
+
+.cf-btn:hover {
+  background-color: #0D9488;
+}
+
+.empty-table {
+  padding: 48px;
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.empty-table i {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.cf-damage-info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: var(--divider);
+  border-radius: 8px;
+}
+
+.cf-damage-info p {
+  margin-bottom: 8px;
+}
+
+/* Badge */
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge-success {
+  background-color: rgba(34, 197, 94, 0.1);
+  color: var(--success);
+}
+
+.badge-warning {
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+}
+
+.badge-danger {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--danger);
+}
+
+@media (max-width: 768px) {
+  .table-column-headers,
+  tbody tr {
+    grid-template-columns: 100px 1fr 100px;
+  }
+  
+  td {
+    padding: 12px 8px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  #cf-rules-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  #cf-rules-table th,
+  #cf-rules-table td {
+    min-width: 100px;
+  }
+  
+  #cf-rules-table th:nth-child(2),
+  #cf-rules-table td:nth-child(2) {
+    min-width: 200px;
+  }
+}

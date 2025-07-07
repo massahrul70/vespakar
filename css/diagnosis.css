@@ -1,0 +1,483 @@
+/* Diagnosis Styles */
+.diagnosis-section {
+  background-color: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.diagnosis-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: var(--surface);
+  padding: 24px 24px 0;
+}
+
+.diagnosis-title {
+  margin-bottom: 16px;
+}
+
+.diagnosis-title h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.diagnosis-title > p {
+  color: var(--text-secondary);
+}
+
+.search-container {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--divider);
+}
+
+.symptoms-list {
+  padding: 24px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.symptom-item {
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--background);
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.symptom-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.symptom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.symptom-info {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.symptom-code {
+  font-size: 0.875rem;
+  color: white;
+  background-color: var(--primary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  min-width: 50px;
+  text-align: center;
+}
+
+.symptom-title {
+  font-weight: 500;
+  flex: 1;
+}
+
+.symptom-clear {
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 1.25rem;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.symptom-item.selected .symptom-clear {
+  opacity: 1;
+  visibility: visible;
+}
+
+.symptom-clear:hover {
+  color: var(--danger);
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+.confidence-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.confidence-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.confidence-options {
+  display: flex;
+  gap: 4px;
+}
+
+.confidence-option {
+  flex: 1;
+  padding: 8px 4px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background-color: var(--surface);
+  font-size: 0.75rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.confidence-option:hover {
+  background-color: var(--divider);
+}
+
+.confidence-option.selected {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.diagnosis-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  padding: 16px 24px;
+  background-color: var(--divider);
+  border-top: 1px solid var(--border);
+}
+
+.diagnosis-results {
+  background-color: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.diagnosis-results h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.no-results {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-tertiary);
+}
+
+.no-results i {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.diagnosis-loading {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+.diagnosis-loading p {
+  margin-top: 16px;
+  color: var(--text-secondary);
+}
+
+.results-content {
+  display: none;
+}
+
+.top-result {
+  background-color: var(--background);
+  border-radius: 8px;
+  padding: 24px;
+  margin-bottom: 24px;
+  border-left: 4px solid var(--primary);
+}
+
+.top-result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.top-result-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.result-percentage {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.top-result-symptoms {
+  margin-top: 16px;
+}
+
+.top-result-symptoms h4 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.symptom-chip {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: var(--primary);
+  color: white;
+  font-size: 0.75rem;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.results-section {
+  margin-top: 24px;
+}
+
+.results-section h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 12px;
+  background-color: var(--divider);
+  border-radius: 8px;
+}
+
+.results-list {
+  display: grid;
+  gap: 12px;
+}
+
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-radius: 8px;
+  background-color: var(--background);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid var(--border);
+}
+
+.result-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--primary);
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.result-title {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.result-code {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.result-percentage {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-left: 16px;
+}
+
+.damage-details {
+  padding: 16px;
+}
+
+.damage-info {
+  margin-bottom: 24px;
+}
+
+.damage-info h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.damage-description {
+  color: var(--text-secondary);
+}
+
+.damage-cf {
+  background-color: var(--primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+.symptoms-contributed {
+  margin-bottom: 24px;
+}
+
+.symptoms-contributed h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.symptom-contribution {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--background);
+  margin-bottom: 8px;
+}
+
+.symptom-contribution-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.symptom-contribution-title {
+  font-weight: 500;
+}
+
+.symptom-contribution-code {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.symptom-contribution-value {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.repair-suggestions {
+  margin-bottom: 24px;
+}
+
+.repair-suggestions h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.repair-suggestion-item {
+  padding: 12px;
+  border-radius: 8px;
+  background-color: var(--background);
+  margin-bottom: 8px;
+}
+
+.repair-suggestion-title {
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.repair-suggestion-description {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+/* Solutions Management */
+.solution-item {
+  position: relative;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.solution-item textarea {
+  flex: 1;
+  min-height: 60px;
+  resize: vertical;
+}
+
+.solution-remove {
+  background-color: var(--danger);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.solution-remove:hover {
+  background-color: #DC2626;
+  transform: scale(1.05);
+}
+
+.solution-remove:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .confidence-options {
+    flex-direction: column;
+  }
+  
+  .confidence-option {
+    padding: 12px;
+  }
+  
+  .symptom-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .symptom-info {
+    width: 100%;
+  }
+  
+  .result-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .result-percentage {
+    margin-left: 0;
+    align-self: flex-end;
+  }
+  
+  .solution-item {
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .solution-remove {
+    align-self: flex-end;
+    width: 32px;
+    height: 32px;
+  }
+}

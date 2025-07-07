@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kerusakan - Sistem Pakar Vespa Excel</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/tables.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Fixed Header -->
+  <header class="fixed-header">
+    <div class="header-left">
+      <button class="header-toggle" id="header-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="index.html" class="header-logo">
+        <i class="fas fa-motorcycle"></i>
+        <span>Vespa Excel</span>
+      </a>
+    </div>
+    
+    <div class="header-right">
+      <div class="header-theme-toggle">
+        <input type="checkbox" id="header-theme-switch" class="header-theme-switch">
+        <label for="header-theme-switch" class="header-theme-switch-label">
+          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
+      
+      <button id="expert-login-btn" class="btn btn-primary">
+        <i class="fas fa-user-cog"></i>
+        <span>Admin</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">Nama Pengguna</h3>
+          <span id="user-role">Peran</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li>
+            <a href="index.html" data-tooltip="Beranda">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="symptoms.html" data-tooltip="Tabel Gejala">
+              <i class="fas fa-list-ul"></i>
+              <span>Tabel Gejala</span>
+            </a>
+          </li>
+          <li class="active">
+            <a href="damages.html" data-tooltip="Tabel Kerusakan">
+              <i class="fas fa-tools"></i>
+              <span>Tabel Kerusakan</span>
+            </a>
+          </li>
+          <li>
+            <a href="diagnosis.html" data-tooltip="Diagnosis">
+              <i class="fas fa-stethoscope"></i>
+              <span>Diagnosis</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Keluar</span>
+        </button>
+        
+        <div class="theme-toggle">
+          <input type="checkbox" id="theme-switch" class="theme-switch">
+          <label for="theme-switch" class="theme-switch-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="ball"></span>
+          </label>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Tabel Kerusakan</h1>
+        <div class="header-actions">
+          <div class="user-welcome">
+            Selamat datang, <span id="header-user-name">Pengguna</span>!
+          </div>
+        </div>
+      </header>
+      
+      <div class="table-container">
+        <div class="table-header">
+          <div class="table-actions">
+            <div class="search-container">
+              <input type="text" id="search-damages" placeholder="Cari kerusakan...">
+              <i class="fas fa-search"></i>
+            </div>
+            
+            <button id="add-damage-btn" class="btn btn-primary expert-only">
+              <i class="fas fa-plus"></i>
+              <span>Tambah Kerusakan</span>
+            </button>
+          </div>
+          
+          <div class="table-column-headers">
+            <span>Kode</span>
+            <span>Deskripsi Kerusakan</span>
+            <span class="expert-only">Aksi</span>
+          </div>
+        </div>
+        
+        <div class="table-wrapper">
+          <table id="damages-table">
+            <tbody id="damages-data">
+              <!-- Damages data will be populated here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  <!-- Sync Status Indicator -->
+  <div class="sync-status online" id="sync-status" title="Status Sinkronisasi">
+    <i class="fas fa-wifi"></i>
+  </div>
+  
+  <!-- Add/Edit Damage Modal -->
+  <div id="damage-modal" class="modal">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h2 id="modal-title">Tambah Kerusakan Baru</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="damage-form">
+          <div class="form-group">
+            <label for="damage-code">Kode Kerusakan</label>
+            <input type="text" id="damage-code" name="code" required placeholder="K001" readonly>
+          </div>
+          <div class="form-group">
+            <label for="damage-description">Deskripsi Kerusakan</label>
+            <textarea id="damage-description" name="description" required placeholder="Masukkan deskripsi kerusakan" rows="3"></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="damage-solutions">Solusi / Saran Perbaikan</label>
+            <p class="form-help-text">Masukkan setiap solusi dalam baris terpisah. Penomoran akan ditambahkan secara otomatis.</p>
+            <textarea 
+              id="damage-solutions" 
+              name="solutions" 
+              placeholder="Contoh:&#10;Periksa kabel koneksi CDI&#10;Ganti CDI dengan yang baru jika rusak&#10;Periksa sistem kelistrikan terkait" 
+              rows="6"
+            ></textarea>
+          </div>
+          
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-damage">Batal</button>
+            <button type="submit" class="btn btn-primary">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- CF Rules Modal -->
+  <div id="cf-rules-modal" class="modal">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h2 id="cf-modal-title">Aturan CF untuk Kerusakan</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="cf-damage-info">
+          <p><strong>Kode Kerusakan:</strong> <span id="cf-damage-code"></span></p>
+          <p><strong>Deskripsi:</strong> <span id="cf-damage-description"></span></p>
+        </div>
+        
+        <div class="table-actions">
+          <button id="add-cf-rule-btn" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            <span>Tambah Aturan Gejala</span>
+          </button>
+        </div>
+        
+        <div class="table-wrapper">
+          <table id="cf-rules-table">
+            <thead>
+              <tr>
+                <th>Kode Gejala</th>
+                <th>Deskripsi Gejala</th>
+                <th>MB</th>
+                <th>MD</th>
+                <th>CF (MB-MD)</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="cf-rules-data">
+              <!-- CF rules data will be populated here -->
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="form-actions">
+          <button type="button" class="btn btn-primary" id="save-cf-rules">Simpan Aturan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Add CF Rule Modal -->
+  <div id="add-cf-rule-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Tambah Aturan Gejala</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="cf-rule-form">
+          <div class="form-group">
+            <label for="cf-symptom">Gejala</label>
+            <select id="cf-symptom" name="symptom" required>
+              <option value="">Pilih gejala</option>
+              <!-- Symptoms will be populated here -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-mb">Nilai Keyakinan (MB)</label>
+            <input type="number" id="cf-mb" name="mb" required min="0" max="1" step="0.1" placeholder="0.0 - 1.0">
+          </div>
+          <div class="form-group">
+            <label for="cf-md">Nilai Ketidakyakinan (MD)</label>
+            <input type="number" id="cf-md" name="md" required min="0" max="1" step="0.1" placeholder="0.0 - 1.0">
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-cf-rule">Batal</button>
+            <button type="submit" class="btn btn-primary">Tambah Aturan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Delete Confirmation Modal -->
+  <div id="delete-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Konfirmasi Hapus</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <p>Apakah Anda yakin ingin menghapus item ini? Tindakan ini tidak dapat dibatalkan.</p>
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="cancel-delete">Batal</button>
+          <button type="button" class="btn btn-danger" id="confirm-delete">Hapus</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Expert Login Modal -->
+  <div id="expert-login-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Login Pakar</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="expert-login-form">
+          <div class="form-group">
+            <label for="expert-username">Username</label>
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="expert-username" name="username" required placeholder="Masukkan username pakar">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expert-password">Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="expert-password" name="password" required placeholder="Masukkan password pakar">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-expert-login">Batal</button>
+            <button type="submit" class="btn btn-primary">
+              <span>Login</span>
+              <i class="fas fa-sign-in-alt"></i>
+            </button>
+          </div>
+        </form>
+        <div class="login-footer">
+          <p><strong>Kredensial Login Pakar:</strong></p>
+          <p>Username: admin | Password: admin123</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/sync.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/damages.js"></script>
+</body>
+</html>

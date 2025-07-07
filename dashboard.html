@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Sistem Pakar Vespa Excel</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Fixed Header -->
+  <header class="fixed-header">
+    <div class="header-left">
+      <button class="header-toggle" id="header-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="index.html" class="header-logo">
+        <i class="fas fa-motorcycle"></i>
+        <span>Vespa Excel</span>
+      </a>
+    </div>
+    
+    <div class="header-right">
+      <div class="header-theme-toggle">
+        <input type="checkbox" id="header-theme-switch" class="header-theme-switch">
+        <label for="header-theme-switch" class="header-theme-switch-label">
+          <i class="fas fa-sun"></i>
+          <i class="fas fa-moon"></i>
+          <span class="ball"></span>
+        </label>
+      </div>
+      
+      <button id="expert-login-btn" class="btn btn-primary">
+        <i class="fas fa-user-cog"></i>
+        <span>Admin</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="user-info">
+        <div class="user-avatar">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="user-details">
+          <h3 id="user-name">Nama Pengguna</h3>
+          <span id="user-role">Peran</span>
+        </div>
+      </div>
+      
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active">
+            <a href="index.html" data-tooltip="Beranda">
+              <i class="fas fa-tachometer-alt"></i>
+              <span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="symptoms.html" data-tooltip="Tabel Gejala">
+              <i class="fas fa-list-ul"></i>
+              <span>Tabel Gejala</span>
+            </a>
+          </li>
+          <li>
+            <a href="damages.html" data-tooltip="Tabel Kerusakan">
+              <i class="fas fa-tools"></i>
+              <span>Tabel Kerusakan</span>
+            </a>
+          </li>
+          <li>
+            <a href="diagnosis.html" data-tooltip="Diagnosis">
+              <i class="fas fa-stethoscope"></i>
+              <span>Diagnosis</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      
+      <div class="sidebar-footer">
+        <button id="logout-btn" class="btn btn-outline">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Keluar</span>
+        </button>
+        
+        <div class="theme-toggle">
+          <input type="checkbox" id="theme-switch" class="theme-switch">
+          <label for="theme-switch" class="theme-switch-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span class="ball"></span>
+          </label>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="main-header">
+        <h1>Beranda</h1>
+        <div class="header-actions">
+          <div class="user-welcome">
+            Selamat datang, <span id="header-user-name">Pengguna</span>!
+          </div>
+        </div>
+      </header>
+      
+      <div class="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Kerusakan</h3>
+            <p id="damage-count">0</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-list-ul"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Total Gejala</h3>
+            <p id="symptom-count">0</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Diagnosis Dilakukan</h3>
+            <p id="diagnosis-count">0</p>
+          </div>
+        </div>
+        
+        <div class="stat-card">
+          <div class="stat-icon">
+            <i class="fas fa-motorcycle"></i>
+          </div>
+          <div class="stat-info">
+            <h3>Sistem</h3>
+            <p>Vespa Excel CF</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="dashboard-info">
+        <div class="info-card">
+          <h2>Tentang Sistem Pakar</h2>
+          <div class="info-content">
+            <p>Sistem pakar ini menggunakan metode Certainty Factor (CF) untuk mendiagnosis masalah pada motor Vespa Excel berdasarkan gejala yang diamati oleh pengguna.</p>
+            <p>Metode Certainty Factor menggabungkan pengetahuan pakar dengan pengamatan pengguna untuk memberikan tingkat keyakinan pada setiap diagnosis.</p>
+            <h3>Cara Kerja:</h3>
+            <ol>
+              <li>Pakar mendefinisikan kerusakan dan gejala yang terkait</li>
+              <li>Setiap hubungan gejala-kerusakan diberi nilai keyakinan (MB) dan ketidakyakinan (MD)</li>
+              <li>Pengguna memilih gejala yang diamati dan tingkat keyakinannya</li>
+              <li>Sistem menghitung nilai CF dan memberikan daftar kemungkinan kerusakan</li>
+            </ol>
+          </div>
+        </div>
+        
+        <div class="info-card">
+          <h2>Fitur Sistem</h2>
+          <div class="info-content">
+            <ul>
+              <li><strong>Beranda:</strong> Ringkasan statistik sistem</li>
+              <li><strong>Tabel Gejala:</strong> Kelola data gejala</li>
+              <li><strong>Tabel Kerusakan:</strong> Kelola data kerusakan dan aturan CF</li>
+              <li><strong>Diagnosis:</strong> Lakukan diagnosis berdasarkan gejala yang diamati</li>
+            </ul>
+            <p><strong>Pengguna Pakar</strong> dapat menambah, mengubah, dan menghapus data dalam sistem.</p>
+            <p><strong>Pengguna Biasa</strong> hanya dapat melakukan diagnosis berdasarkan data yang ada.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Expert Login Modal -->
+  <div id="expert-login-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Login Pakar</h2>
+        <span class="close-modal">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="expert-login-form">
+          <div class="form-group">
+            <label for="expert-username">Username</label>
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="expert-username" name="username" required placeholder="Masukkan username pakar">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="expert-password">Password</label>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="expert-password" name="password" required placeholder="Masukkan password pakar">
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-expert-login">Batal</button>
+            <button type="submit" class="btn btn-primary">
+              <span>Login</span>
+              <i class="fas fa-sign-in-alt"></i>
+            </button>
+          </div>
+        </form>
+        <div class="login-footer">
+          <p><strong>Kredensial Login Pakar:</strong></p>
+          <p>Username: admin | Password: admin123</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
